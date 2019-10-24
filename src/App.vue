@@ -1,4 +1,4 @@
-<template>
+<template lang="pug">
   <div id="app">
     <h1>Hello</h1>
   </div>
@@ -10,5 +10,5 @@ export default {
 }
 </script>
 
-<style>
+<style lang="stylus">
 </style>
