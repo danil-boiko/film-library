@@ -78,6 +78,11 @@ export default {
         completed: false,
         editing: false
       })
+
+      //Reset
+      this.taskId += 1
+      this.taskTitle = ''
+      this.taskDescription = ''
     }
   }
 }
