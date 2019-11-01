@@ -3,6 +3,17 @@
     section
       .container
         h1.ui-title-1 Home
+        input(
+          type="text"
+          placeholder="What we will watch?"
+          v-model="taskTitle"
+          @keyup.enter="newTask"
+        )
+        textarea(
+          type="text"
+          v-model="taskDescription"
+          @keyup.enter="newTask"
+        )
     section
       .container
         .task-list
@@ -13,7 +24,7 @@
           )
             .ui-card.ui-card--shadow
               .task-item__info
-                .task-item__main-info 
+                .task-item__main-info
                   span.ui-label.ui-label--light {{ task.whatWatch }}
                   span Total Time:
                 span.button-close
@@ -33,6 +44,10 @@
 export default {
   data () {
     return {
+      taskTitle: '',
+      taskDescription: '',
+      whatWatch: 'Film',
+      taskId: 3,
       tasks: [
         {
           'id': 1,
@@ -51,6 +66,18 @@ export default {
           'editing': false
         }
       ]
+    }
+  },
+  methods: {
+    newTask () {
+      this.tasks.push({
+        id: this.taskId,
+        title: this.taskTitle,
+        description: this.taskDescription,
+        whatWatch: this.whatWatch,
+        completed: false,
+        editing: false
+      })
     }
   }
 }
@@ -80,6 +107,6 @@ export default {
   margin-bottom 18px
   .ui-checkbox-wrapper
     margin-right 8px
-  .ui-title-3 
+  .ui-title-3
     margin-bottom 0
 </style>
