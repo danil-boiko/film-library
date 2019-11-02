@@ -117,6 +117,11 @@ export default {
       this.taskId += 1
       this.taskTitle = ''
       this.taskDescription = ''
+    },
+    getHoursAndMinutes (minutes) {
+      let hours = Math.trunc(minutes / 60)
+      let min = minutes % 60
+      return hours + ' Hours ' + min + ' Minutes'
     }
   }
 }
