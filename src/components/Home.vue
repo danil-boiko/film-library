@@ -33,15 +33,44 @@
           label(
             for="radioSerial"
           ) Serial
+
+        // TOTAL TIME
         .total-time
+
+          // Film Time
           .total-time__film(
             v-if="whatWatch === 'Film'"
           )
-            span Total Film Times
+            span.time-title Hours
+            input.time-input(
+              type="number"
+              v-model="filmHours"
+            )
+            span.time-title Minutes
+            input.time-input(
+              type="number"
+              v-model="filmMinutes"
+            )
+
+          //Serial Time
           .total-time__serial(
             v-if="whatWatch === 'Serial'"
           )
-            span Total Serial Times
+            span.time-title How many season?
+            input.time-input(
+              type="number"
+              v-model="serialSeason"
+            )
+            span.time-title How many series?
+            input.time-input(
+              type="number"
+              v-model="serialSeries"
+            )
+            span.time-title How long is one series? (minutes)
+            input.time-input(
+              type="number"
+              v-model="serialSeriesMinutes"
+            )
         .tag-list
         .ui-tag__wrapper
           .ui-tag
@@ -57,7 +86,16 @@ export default {
       taskTitle: '',
       taskDescription: '',
       whatWatch: 'Film',
-      taskId: 3
+      taskId: 3,
+
+      // Total Time
+      // Film
+      filmHours: 1,
+      filmMinutes: 30,
+      // Serial
+      serialSeason: 1,
+      serialSeries: 11,
+      serialSeriesMinutes: 40
     }
   },
   methods: {
@@ -65,14 +103,15 @@ export default {
       if (this.taskTitle === '') {
         return
       }
-      this.tasks.push({
+      const task = {
         id: this.taskId,
         title: this.taskTitle,
         description: this.taskDescription,
         whatWatch: this.whatWatch,
         completed: false,
         editing: false
-      })
+      }
+      console.log(task)
 
       // Reset
       this.taskId += 1
@@ -84,7 +123,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-
+// Options
 .option-list
   display flex
   margin-bottom 20px
@@ -94,4 +133,16 @@ export default {
     margin-right 20px
     &:last-child
       margin-right 0
+
+// Total time
+.total-time
+  margin-bottom 20px
+
+.time-title
+  display block
+  margin-bottom 6px
+
+.time-input
+  max-width 80px
+  margin-right 10px
 </style>
