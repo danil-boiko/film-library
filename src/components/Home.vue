@@ -76,6 +76,33 @@
 
             p {{ serialTime }}
 
+        // TAG LIST
+        // Add New Tag
+        .tag-list.tag-list--addTagUsed
+          .ui-tag__wrapper(
+            @click="tagMenuShow = !tagMenuShow"
+          )
+            .ui-tag
+              span.tag-title Add New
+              span.button-close(
+                :class="{ active: !tagMenuShow }"
+              )
+        
+        // Show Input
+        .tag-list.tag-list--menu(
+          v-if="tagMenuShow"
+        )
+          input.tag-add--input(
+            type="text"
+            placeholder="New tag"
+            v-model="tagTitle"
+            @keyup.enter="newTag"
+          )
+          .button.button-default(
+            @click="newTag"
+          ) Send
+
+        // All Tags
         .tag-list
           .ui-tag__wrapper(
             v-for="tag in tags"
