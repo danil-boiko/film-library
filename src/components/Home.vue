@@ -78,7 +78,7 @@
 
         // TAG LIST
         // Add New Tag
-        .tag-list.tag-list--addTagUsed
+        .tag-list.tag-list--add
           .ui-tag__wrapper(
             @click="tagMenuShow = !tagMenuShow"
           )
@@ -87,7 +87,6 @@
               span.button-close(
                 :class="{ active: !tagMenuShow }"
               )
-        
         // Show Input
         .tag-list.tag-list--menu(
           v-if="tagMenuShow"
@@ -116,6 +115,11 @@
               span.button-close
         p {{ tagsUsed }}
 
+        .button-list
+          .button.button--round.button-primary(
+            @click="newTask"
+          ) Send
+
 </template>
 
 <script>
@@ -137,6 +141,8 @@ export default {
       serialSeriesMinutes: 40,
 
       // Tags
+      tagTitle: '',
+      tagMenuShow: false,
       tagsUsed: [],
       tags: [
         {
@@ -155,6 +161,18 @@ export default {
     }
   },
   methods: {
+    newTag () {
+      if (this.tagTitle === '') {
+        return
+      }
+      this.tags.push({
+        title: this.tagTitle,
+        used: false
+      })
+      /* const tag = {
+        title: this.tagTitle
+      } */
+    },
     newTask () {
       if (this.taskTitle === '') {
         return
@@ -171,6 +189,7 @@ export default {
         description: this.taskDescription,
         whatWatch: this.whatWatch,
         time,
+        tagsUsed: this.tagsUsed,
         completed: false,
         editing: false
       }
@@ -180,6 +199,7 @@ export default {
       this.taskId += 1
       this.taskTitle = ''
       this.taskDescription = ''
+      this.tagsUsed = []
     },
     addTagUsed (tag) {
       tag.use = !tag.use
@@ -244,4 +264,36 @@ export default {
   max-width: 80px
   margin-right: 10px
 }
+
+// Tags
+.tag-list
+  margin-bottom 20px
+
+.ui-tag__wrapper
+  margin-right 18px
+  margin-bottom 10px
+  &:last-child
+    margin-right 0
+
+.ui-tag
+  .button-close
+    &.active
+      transform: rotate(45deg)
+  &.used
+    background-color: #444ce0
+    color #ffffff
+    .button-close
+      &:before,
+      &:after
+        background-color: #ffffff
+// Tag Menu Show
+.tag-list--menu
+  display flex
+  justify-content space-between
+  align-items center
+// New Tag Input
+.tag-add--input
+  margin-bottom 0
+  margin-right 10px
+  height 42px
 </style>
