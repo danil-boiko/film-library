@@ -5,7 +5,6 @@
         .task-list__header
           h1.ui-title-1 Tasks
           .buttons-list
-            p {{ filter }}
             .button.button--round.button-default(
               @click="filter = 'active'"
             ) Active
@@ -93,6 +92,9 @@ export default {
       color #909399
   &:last-child
     margin-bottom 0
+
+.task-item__foter
+  margin-top 20px
 
 .total-time
   margin-bottom 20px
