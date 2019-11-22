@@ -48,7 +48,7 @@
                 p.typo__p(v-if="submitStatus === 'ERROR'") Please fill the form correctly.
                 p.typo__p(v-if="submitStatus === 'PENDING'") Sending...
               .button-list.button-list--info
-                span Do tou have account?
+                span Do you have account?
                   router-link(to="/login")  Enter Here
 </template>
 
