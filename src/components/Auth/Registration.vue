@@ -18,20 +18,30 @@
                 )
                 .error(v-if="!$v.email.required") Field is required
                 .error(v-if="!$v.email.email") Email is not correct
-              input(
-                type="password"
-                placeholder="Password"
-                v-model="password"
-              )
-              input(
-                type="password"
-                placeholder="Repeat your password"
-                v-model="repeatPassword"
-              )
+              .form-item(:class="{ 'errorInput': $v.password.$error }")
+                input(
+                  type="password"
+                  placeholder="Password"
+                  v-model="password"
+                  :class="{ error: $v.password.$error }"
+                  @change="$v.password.$touch()"
+                )
+                .error(v-if="!$v.password.required") Password is required.
+                .error(v-if="!$v.password.minLength")
+                  | Password must have at least {{ $v.password.$params.minLength.min }} letters.
+              .form-item(:class="{ 'errorInput': $v.repeatPassword.$error }")
+                input(
+                  type="password"
+                  placeholder="Repeat your password"
+                  v-model="repeatPassword"
+                  :class="{ error: $v.repeatPassword.$error }"
+                  @change="$v.repeatPassword.$touch()"
+                )
+                .error(v-if="!$v.repeatPassword.sameAsPassword") Passwords must be identical.
 </template>
 
 <script>
-import { required, email } from 'vuelidate/lib/validators'
+import { required, email, minLength, sameAs } from 'vuelidate/lib/validators'
 export default {
   data () {
     return {
@@ -44,6 +54,13 @@ export default {
     email: {
       required,
       email
+    },
+    password: {
+      required,
+      minLength: minLength(6)
+    },
+    repeatPassword: {
+      sameAsPassword: sameAs('password')
     }
   }
 }
