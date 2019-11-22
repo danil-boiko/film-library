@@ -88,32 +88,36 @@
                 :class="{ active: !tagMenuShow }"
               )
         // Show Input
-        .tag-list.tag-list--menu(
-          v-if="tagMenuShow"
-        )
-          input.tag-add--input(
-            type="text"
-            placeholder="New tag"
-            v-model="tagTitle"
-            @keyup.enter="newTag"
+        transition(name="fade")
+          .tag-list.tag-list--menu(
+            v-if="tagMenuShow"
           )
-          .button.button-default(
-            @click="newTag"
-          ) Send
+            input.tag-add--input(
+              type="text"
+              placeholder="New tag"
+              v-model="tagTitle"
+              @keyup.enter="newTag"
+            )
+            .button.button-default(
+              @click="newTag"
+            ) Send
 
         // All Tags
         .tag-list
-          .ui-tag__wrapper(
-            v-for="tag in tags"
-            :key="tag.title"
+          transition-group(
+            enter-active-class="animated fadeInRight"
+            leave-active-class="animated fadeOutDown"
           )
-            .ui-tag(
-              @click="addTagUsed(tag)"
-              :class="{active: tag.use}"
+            .ui-tag__wrapper(
+              v-for="tag in tags"
+              :key="tag.title"
             )
-              span.tag-title {{ tag.title }}
-              span.button-close
-        p {{ tagsUsed }}
+              .ui-tag(
+                @click="addTagUsed(tag)"
+                :class="{active: tag.use}"
+              )
+                span.tag-title {{ tag.title }}
+                span.button-close
 
         .button-list
           .button.button--round.button-primary(
@@ -264,6 +268,9 @@ export default {
   margin-bottom 10px
   &:last-child
     margin-right 0
+  :hover
+    background-color #444ce0
+    color white
 
 .ui-tag
   .button-close
@@ -275,7 +282,7 @@ export default {
     .button-close
       &:before,
       &:after
-        background-color: #ffffff
+        background-color: blue
 // Tag Menu Show
 .tag-list--menu
   display flex

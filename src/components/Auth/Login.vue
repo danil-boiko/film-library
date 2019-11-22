@@ -111,11 +111,10 @@ export default {
   }
 }
 
-input {
-  &.error {
-    border-color: #fc5c65;
-  }
-}
+input
+  &.error
+    border-color #fc5c65
+    animation shake 0.3s
 
 .button-list
   text-align right

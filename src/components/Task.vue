@@ -15,6 +15,7 @@
               @click="filter = 'all'"
             ) All
         .task-list
+        transition-group(name="taskList")
           .task-item(
             v-for="task in tasksFilter"
             :key="task.id"

@@ -126,7 +126,8 @@ export default {
 
 input {
   &.error {
-    border-color: #fc5c65;
+    border-color: #fc5c65
+    animation: shake 0.3s
   }
 }
 
